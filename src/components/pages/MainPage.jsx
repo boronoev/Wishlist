@@ -1,0 +1,23 @@
+import { Link } from "react-router-dom"
+
+export default function Mainpage() {
+  return (
+    <div className="mainpage center-wrapper">
+      <h3 className="mainpage__title">Создавайте свои списки</h3>
+      <h4 className="mainpage__smalltitle">Получайте в подарок только желанное</h4>
+      <div className="mainpage__container">
+        <div className="mainpage__item">
+          <h4 className="mainpage-item__title">Сделать персональный список подарков </h4>
+          <p className="mainpage-item__text">Distinctio libero voluptatum incidunt ex deserunt (написать для чего его создавать, как в рекламе)</p>
+          <Link to='/wishlist'  className="mainpage-item__create">Создать</Link>
+        </div>
+        <div className="mainpage__item">
+          <h4 className="mainpage-item__title">Создать список для праздничного события</h4>
+          <p className="mainpage-item__text">Distinctio libero voluptatum incidunt ex deserunt (написать для чего его создавать, как в рекламе)</p>
+          <Link to='/giftregistry' className="mainpage-item__create">Создать</Link>
+          {/* <a href="https://www.vecteezy.com/free-vector/gift">Gift Vectors by Vecteezy</a> */}
+        </div>
+      </div>
+    </div>
+  )
+}
