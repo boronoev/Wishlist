@@ -228,3 +228,7 @@
 input,label {
   display: block;
 }
+
+.wishlist__url-input {
+  display: inline-block;
+}
