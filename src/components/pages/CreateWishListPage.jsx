@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { Link } from "react-router-dom";
 
 export default function CreateWishlist() {
   let sitestring = '';
@@ -11,13 +12,26 @@ export default function CreateWishlist() {
   let imageSource;
   const dispatch = useDispatch();
   const addList = () => {
-    dispatch({ type: 'ADDLIST', payload: list });
+    if (listStatus) {
+      dispatch({ type: 'ADDLIST', payload: list });
+      setListStatus(false);
+      document.querySelector('.save').setAttribute('hidden', true);
+      document.querySelector('.wishlist-link').removeAttribute('hidden');
+
+    }
+    
+  }
+  const createNewList = () => {
     setList({...list, id: Date.now(), title: titlevalue, items: [] });
     setDescription('');
     setTitle('');
     setName('');
     setPrice('');
     setURL('');
+    setListStatus('Сохранить');
+    document.querySelector('.wishlist-link').setAttribute('hidden', true);
+    document.querySelector('.save').removeAttribute('hidden');
+
   }
   const [list, setList] = useState({ id: Date.now(), title: 'noname', items: [] });
   const handleNewSubmit = (e) => {
@@ -32,6 +46,7 @@ export default function CreateWishlist() {
     setURL('');
   }
 
+  const [listStatus, setListStatus] = useState(true);
 
   const [titlevalue, setTitle] = useState('');
   const handleTitleChange = (e) => {
@@ -107,12 +122,12 @@ export default function CreateWishlist() {
 
         <form onSubmit={handleNewSubmit}>
           <label>Введите url ссылки</label>
-          <input className="wishlist__url-input" value={urlvalue} onChange={handleURLChange} name="url"></input>
+          <input className="wishlist__url-input" value={urlvalue} onChange={handleURLChange} name="url" required></input>
           <button type="button">+</button>
           <label>Название товара</label>
-          <input value={namevalue} onChange={handleNameChange} name="name"></input>
+          <input value={namevalue} onChange={handleNameChange} name="name" required></input>
           <label>Цена (руб.)</label>
-          <input value={pricevalue} onChange={handlePriceChange} name="price"></input>
+          <input value={pricevalue} onChange={handlePriceChange} name="price" required></input>
           <label>Описание</label>
           <input placeholder="необязательно" value={descriptionvalue} onChange={handleDescriptionChange} name="description"></input>
           <button>Добавить</button>
@@ -128,8 +143,10 @@ export default function CreateWishlist() {
         <div>
           {list.items.map(item=>(<div key={item.url}><p>{item.name}</p><p>{item.price}</p><a href={item.url}>{item.url}</a></div>))}
         </div>
-        <button onClick={addList}>Сохранить</button>
-        <button onClick={()=> console.log(stateView)}>посмотреть глобальный state</button>
+        <button className="save" onClick={addList}>Сохранить</button>
+        <Link className="wishlist-link" to={`/${list.id}`} hidden>Перейти к списку</Link>
+        <button onClick={createNewList}>Создать новый список</button>
+        {/* <button onClick={()=> console.log(stateView.lists)}>посмотреть глобальный state</button> */}
       </div>
     </div>
   )

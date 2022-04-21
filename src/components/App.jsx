@@ -8,6 +8,7 @@ import Signup from './pages/SignUpPage'
 import NotFoundPage from './pages/NotFoundPage'
 import CreateGiftRegistry from './pages/CreateGiftRegistryPage'
 import CreateWishlist from './pages/CreateWishListPage'
+import Wishlist from './pages/Wishlist'
 
 
 export default function WishlistApp() {
@@ -37,7 +38,7 @@ export default function WishlistApp() {
           <Route path="giftregistry" element={<CreateGiftRegistry />} />
           <Route path="wishlist" element={<CreateWishlist />} />
 
-          {/* <Route path=":id" element={<Wishlist />}></Route> */}
+          <Route path=":id" element={<Wishlist />}></Route>
         </Route>
         <Route path="*" element={<NotFoundPage />} />
       </Routes>
