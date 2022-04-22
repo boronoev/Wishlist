@@ -224,11 +224,149 @@
   cursor: default;
 }
 
-
-input,label {
-  display: block;
+.add-url {
+  position: absolute;
+  right: 0;
+  font-size: 18px;
+  padding: 6px 10px;
+  border-top-right-radius: 20px;
+  border-bottom-right-radius: 20px;
+  border: 2px solid gray;
+  cursor: pointer;
 }
-
+.url-container {
+  margin: 0 auto;
+  width: fit-content;
+  position: relative;
+}
 .wishlist__url-input {
   display: inline-block;
+  margin-bottom: 20px;
+  font-size: 18px;
+  padding: 6px 10px;
+  border-radius: 20px;
+  border: 2px solid gray;
+}
+
+.create-wishlist__title {
+  margin-top: 30px;
+  margin-bottom: 20px;
+  font-family: 'Ubuntu', sans-serif;
+  font-size: 40px;
+  font-weight: 500;
+  text-align: center;
+  cursor: default;
+}
+
+.create-wishlist__smalltitle {
+  margin-top: 10px;
+  margin-bottom: 50px;
+  font-family: 'Ubuntu', sans-serif;
+  font-size: 30px;
+  text-align: center;
+  cursor: default;
+}
+
+.create-wishlist__form {
+  background: linear-gradient(35deg, rgb(255, 255, 255), #a9be5f62);
+  width: 700px;
+  margin: 0 auto;
+  padding: 30px;
+  box-shadow: 0 6px 20px rgb(0 0 0 / 16%);
+  border-radius: 10px;
+}
+.create-wishlist__form-title {
+  font-family: 'Ubuntu', sans-serif;
+  font-size: 24px;
+  cursor: default;
+  margin: 0 auto;
+  display: block;
+  width: fit-content;
+  margin-bottom: 20px;
+}
+.create-wishlist__label {
+  display: block;
+  width: fit-content;
+  margin: 0 auto;
+  font-size: 20px;
+  margin-bottom: 10px;
+  font-family: 'Inter', sans-serif;
+}
+
+.wishlist__title-input {
+  margin-left: 10px;
+  margin-bottom: 20px;
+  font-size: 18px;
+  padding: 6px 10px;
+  border-radius: 20px;
+  border: 2px solid gray;
+}
+.wishlist__input {
+  display: block;
+  margin: 0 auto;
+  margin-bottom: 20px;
+  font-size: 18px;
+  padding: 6px 10px;
+  border-radius: 20px;
+  border: 2px solid gray;
+}
+
+.create-wishlist__title-container {
+  display: flex;
+  justify-content: space-between;
+}
+
+.save {
+  width: 150px;
+  padding: 10px;
+  font-size: 14px;
+  border-radius: 20px;
+  border: 2px solid gray;
+  cursor: pointer;
+  margin-right: 10px;
+  font-weight: 600;
+  font-family: 'Inter', sans-serif;
+  background-color: #fff;
+}
+
+.wishlist-link {
+  width: 150px;
+  padding: 10px;
+  font-size: 14px;
+  border-radius: 20px;
+  border: 2px solid gray;
+  cursor: pointer;
+  margin-right: 10px;
+  font-weight: 600;
+  font-family: 'Inter', sans-serif;
+  background-color: #fff;
+}
+.newlist { 
+  padding: 10px;
+  font-size: 14px;
+  border-radius: 20px;
+  border: 2px solid gray;
+  cursor: pointer;
+  font-weight: 600;
+  font-family: 'Inter', sans-serif;
+  background-color: #fff;
+}
+
+.newlist:disabled {
+  color: gray;
+  background-color: lightgray;
+}
+
+.wishlist__form-submit {
+  display: block;
+  margin: 0 auto;
+  width: 150px;
+  padding: 10px;
+  font-size: 14px;
+  border-radius: 20px;
+  border: 2px solid gray;
+  cursor: pointer;
+  font-weight: 600;
+  font-family: 'Inter', sans-serif;
+  background-color: #fff;
 }

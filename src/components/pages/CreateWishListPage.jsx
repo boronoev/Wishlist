@@ -12,17 +12,19 @@ export default function CreateWishlist() {
   let imageSource;
   const dispatch = useDispatch();
   const addList = () => {
+    if (!list.items.length) return;
     if (listStatus) {
       dispatch({ type: 'ADDLIST', payload: list });
       setListStatus(false);
       document.querySelector('.save').setAttribute('hidden', true);
       document.querySelector('.wishlist-link').removeAttribute('hidden');
+      document.querySelector('.newlist').removeAttribute('disabled');
 
     }
-    
+
   }
   const createNewList = () => {
-    setList({...list, id: Date.now(), title: titlevalue, items: [] });
+    setList({ ...list, id: Date.now(), title: titlevalue, items: [] });
     setDescription('');
     setTitle('');
     setName('');
@@ -109,28 +111,41 @@ export default function CreateWishlist() {
     description = doc.querySelector('.title-info-title-text').textContent;
     price = doc.querySelector('.js-item-price').textContent;
   };
-  const stateView = useSelector(state => state) ;
+  const stateView = useSelector(state => state);
 
   return (
     <div className="center-wrapper">
-      <h3>Создание персонального списка подарков</h3>
+      <h3 className="create-wishlist__title">Создание персонального списка подарков</h3>
       <div>
-        <div>
-          <label>Введите название списка:</label>
-          <input placeholder="необязательно" value={titlevalue} onChange={handleTitleChange} name="title"></input>
+        <div className="create-wishlist__title-container">
+
+          <div>
+            <label className="create-wishlist__smalltitle">Название списка:</label>
+            <input className="wishlist__title-input" placeholder="необязательно" value={titlevalue} onChange={handleTitleChange} name="title"></input>
+          </div>
+          <div>
+            <button className="save" onClick={addList}>Сохранить</button>
+            <Link className="wishlist-link" to={`/${list.id}`} hidden>Перейти к списку</Link>
+            <button className="newlist" onClick={createNewList} disabled>Создать новый список</button>
+          </div>
+
         </div>
 
-        <form onSubmit={handleNewSubmit}>
-          <label>Введите url ссылки</label>
-          <input className="wishlist__url-input" value={urlvalue} onChange={handleURLChange} name="url" required></input>
-          <button type="button">+</button>
-          <label>Название товара</label>
-          <input value={namevalue} onChange={handleNameChange} name="name" required></input>
-          <label>Цена (руб.)</label>
-          <input value={pricevalue} onChange={handlePriceChange} name="price" required></input>
-          <label>Описание</label>
-          <input placeholder="необязательно" value={descriptionvalue} onChange={handleDescriptionChange} name="description"></input>
-          <button>Добавить</button>
+        <form onSubmit={handleNewSubmit} className="create-wishlist__form">
+          <h4 className="create-wishlist__form-title">Добавление подарка в список</h4>
+          <label className="create-wishlist__label">Вставьте ссылку</label>
+          <div className="url-container">
+            <input className="wishlist__url-input" value={urlvalue} onChange={handleURLChange} name="url" required></input>
+            <button className="add-url" type="button">+</button>
+          </div>
+
+          <label className="create-wishlist__label">Название товара</label>
+          <input className="wishlist__input" value={namevalue} onChange={handleNameChange} name="name" required></input>
+          <label className="create-wishlist__label">Цена (руб.)</label>
+          <input className="wishlist__input" value={pricevalue} onChange={handlePriceChange} name="price" required></input>
+          <label className="create-wishlist__label">Описание</label>
+          <input className="wishlist__input" placeholder="необязательно" value={descriptionvalue} onChange={handleDescriptionChange} name="description"></input>
+          <button className="wishlist__form-submit">Добавить</button>
         </form>
         {/* <button onClick={onClick}> fetch</button>
         <button onClick={makeDocSMM}>Sbermegamarket: make doc</button>
@@ -141,11 +156,9 @@ export default function CreateWishlist() {
         <button onClick={() => console.log(description, price, imageSource)}> консоль</button> */}
         <button onClick={() => console.log(list)}> консоль списка</button>
         <div>
-          {list.items.map(item=>(<div key={item.url}><p>{item.name}</p><p>{item.price}</p><a href={item.url}>{item.url}</a></div>))}
+          {list.items.map(item => (<div key={item.url}><p>{item.name}</p><p>{item.price}</p><a href={item.url}>{item.url}</a></div>))}
         </div>
-        <button className="save" onClick={addList}>Сохранить</button>
-        <Link className="wishlist-link" to={`/${list.id}`} hidden>Перейти к списку</Link>
-        <button onClick={createNewList}>Создать новый список</button>
+
         {/* <button onClick={()=> console.log(stateView.lists)}>посмотреть глобальный state</button> */}
       </div>
     </div>
