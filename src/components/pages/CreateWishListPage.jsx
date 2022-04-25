@@ -121,7 +121,7 @@ export default function CreateWishlist() {
 
           <div>
             <label className="create-wishlist__smalltitle">Название списка:</label>
-            <input className="wishlist__title-input" placeholder="необязательно" value={titlevalue} onChange={handleTitleChange} name="title"></input>
+            <input className="wishlist__title-input" value={titlevalue} onChange={handleTitleChange} name="title" autocomplete="off"></input>
           </div>
           <div>
             <button className="save" onClick={addList}>Сохранить</button>
@@ -133,18 +133,28 @@ export default function CreateWishlist() {
 
         <form onSubmit={handleNewSubmit} className="create-wishlist__form">
           <h4 className="create-wishlist__form-title">Добавление подарка в список</h4>
-          <label className="create-wishlist__label">Вставьте ссылку</label>
+          
           <div className="url-container">
-            <input className="wishlist__url-input" value={urlvalue} onChange={handleURLChange} name="url" required></input>
+          <label className="create-wishlist__url-label">Вставьте ссылку:</label>
+            <input className="wishlist__url-input" value={urlvalue} onChange={handleURLChange} name="url" required ></input>
             <button className="add-url" type="button">+</button>
           </div>
+          <div className="create-wishlist__input-container">
+            <div>
+              <label className="create-wishlist__label">Название товара</label>
+              <input className="wishlist__input" value={namevalue} onChange={handleNameChange} name="name" required></input>
+            </div>
+            <div>
+              <label className="create-wishlist__label">Цена (руб.)</label>
+              <input className="wishlist__input" value={pricevalue} onChange={handlePriceChange} name="price" required></input>
+            </div>
+            <div>
+              <label className="create-wishlist__label">Описание</label>
+              <input className="wishlist__input" placeholder="необязательно" value={descriptionvalue} onChange={handleDescriptionChange} name="description"></input>
+            </div>
 
-          <label className="create-wishlist__label">Название товара</label>
-          <input className="wishlist__input" value={namevalue} onChange={handleNameChange} name="name" required></input>
-          <label className="create-wishlist__label">Цена (руб.)</label>
-          <input className="wishlist__input" value={pricevalue} onChange={handlePriceChange} name="price" required></input>
-          <label className="create-wishlist__label">Описание</label>
-          <input className="wishlist__input" placeholder="необязательно" value={descriptionvalue} onChange={handleDescriptionChange} name="description"></input>
+          </div>
+
           <button className="wishlist__form-submit">Добавить</button>
         </form>
         {/* <button onClick={onClick}> fetch</button>
@@ -154,13 +164,14 @@ export default function CreateWishlist() {
         <button onClick={makeDocAli}>Aliexpress: make doc</button>
         <button onClick={makeDocAvito}>Avito market: make doc</button>
         <button onClick={() => console.log(description, price, imageSource)}> консоль</button> */}
-        <button onClick={() => console.log(list)}> консоль списка</button>
-        <div>
-          {list.items.map(item => (<div key={item.url}><p>{item.name}</p><p>{item.price}</p><a href={item.url}>{item.url}</a></div>))}
+        <div className="wishlist__items ">
+          {list.items.map(item => (<div className="wishlist__item" key={item.url}><p className="wish__item">Название: {item.name}</p><p className="wish__item">Цена: {item.price}</p><a href={item.url} className="wish__item">{item.url}</a></div>))}
         </div>
 
         {/* <button onClick={()=> console.log(stateView.lists)}>посмотреть глобальный state</button> */}
       </div>
+      {/* <button onClick={() => console.log(list)}> консоль списка</button> */}
+
     </div>
   )
 }

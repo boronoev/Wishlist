@@ -8,12 +8,12 @@ export default function Mainpage() {
       <div className="mainpage__container">
         <div className="mainpage__item">
           <h4 className="mainpage-item__title">Сделать персональный список подарков </h4>
-          <p className="mainpage-item__text">Distinctio libero voluptatum incidunt ex deserunt (написать для чего его создавать, как в рекламе)</p>
+          <p className="mainpage-item__text">Расскажите с помощью списка свои друзьям и знакомым о том, что вы желаете получить</p>
           <Link to='/wishlist'  className="mainpage-item__create">Создать</Link>
         </div>
         <div className="mainpage__item">
           <h4 className="mainpage-item__title">Создать список для праздничного события</h4>
-          <p className="mainpage-item__text">Distinctio libero voluptatum incidunt ex deserunt (написать для чего его создавать, как в рекламе)</p>
+          <p className="mainpage-item__text">Организуйте выбор подарков для гостей вашего праздника в приятный и удобный процесс</p>
           <Link to='/giftregistry' className="mainpage-item__create">Создать</Link>
           {/* <a href="https://www.vecteezy.com/free-vector/gift">Gift Vectors by Vecteezy</a> */}
         </div>
