@@ -9,9 +9,29 @@ import NotFoundPage from './pages/NotFoundPage'
 import CreateGiftRegistry from './pages/CreateGiftRegistryPage'
 import CreateWishlist from './pages/CreateWishListPage'
 import Wishlist from './pages/Wishlist'
+import useRegistration from '../hooks/useRegistration'
+import useAuth from '../hooks/useAuth'
+import { useEffect } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
 
 
 export default function WishlistApp() {
+
+  const { auth } = useAuth();
+  const credentials = useSelector(state => state.credentials);
+  const dispath = useDispatch();
+
+  const init = async () => {
+    const credentials = await auth('anton.korovin100@inbox.ru', '12345678');
+    console.log(credentials);
+    dispath({type: 'AUTH', payload: credentials});
+  }
+
+  useEffect(() => {
+    init();
+  },[])
+
+  if(!credentials) return null;
 
 
   return (
