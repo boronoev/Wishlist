@@ -17,23 +17,23 @@ import { useDispatch, useSelector } from 'react-redux'
 
 export default function WishlistApp() {
 
-  const { auth } = useAuth();
-  const credentials = useSelector(state => state.credentials);
-  const dispath = useDispatch();
+  // const { auth } = useAuth();
+  // const credentials = useSelector(state => state.credentials);
+  // const dispath = useDispatch();
 
-  const init = async () => {
-    const credentials = await auth('anton.korovin100@inbox.ru', '12345678');
-    console.log(credentials);
-    dispath({type: 'AUTH', payload: credentials});
-  }
+  // const init = async () => {
+  //   const credentials = await auth('anton.korovin100@inbox.ru', '12345678');
+  //   console.log(credentials);
+  //   dispath({type: 'AUTH', payload: credentials});
+  // }
 
-  useEffect(() => {
-    init();
-  },[])
+  // useEffect(() => {
+  //   init();
+  // },[])
 
-  if(!credentials) return null;
+  // if(!credentials) return null;
 
-
+  const state = useSelector(state => state);
   return (
     <div className='app__body'>
       <header className="header" >
@@ -43,8 +43,17 @@ export default function WishlistApp() {
           </div>
           <div><Link className='header__logo' to='/'>YouMe&Wish</Link></div>
           <div className='header__actions header-actions'>
-            <div><Link className='header-actions__item' to='/sign'>Войти</Link></div>
-            <div><Link className='header-actions__item' to='/signup'>Зарегистрироваться</Link></div>
+            {state.credentials ? (
+              <div><Link className='header-actions__item' to='/signup'>{state.credentials.user.email}</Link></div>
+            ) : (
+              <>
+                <div><Link className='header-actions__item' to='/sign'>Войти</Link></div>
+                <div><Link className='header-actions__item' to='/signup'>Зарегистрироваться</Link></div>
+              </>
+            )}
+
+
+
           </div>
         </div>
       </header>

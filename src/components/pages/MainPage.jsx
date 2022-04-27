@@ -1,6 +1,8 @@
+import { useSelector } from "react-redux";
 import { Link } from "react-router-dom"
 
 export default function Mainpage() {
+  const state = useSelector(state => state);
   return (
     <div className="mainpage center-wrapper">
       <h3 className="mainpage__title">Создавайте свои списки</h3>
@@ -18,6 +20,7 @@ export default function Mainpage() {
           {/* <a href="https://www.vecteezy.com/free-vector/gift">Gift Vectors by Vecteezy</a> */}
         </div>
       </div>
+      <button onClick={() => console.log(state)}>посмотреть весь глобальный state</button>
     </div>
   )
 }

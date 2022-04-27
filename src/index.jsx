@@ -7,8 +7,20 @@ import WishlistApp from './components/App';
 import { initializeApp } from "firebase/app";
 import firebaseConfig from './configs/firebase.config';
 import { FirebaseProvider } from './contexts/firebase.context';
+import { child, get, getDatabase, push, ref, set } from 'firebase/database';
 
 const app = initializeApp(firebaseConfig);
+
+const db = getDatabase(app);
+const listsRef = ref(db);
+const listRef = push(listsRef);
+
+// set(listRef, {
+//   title: 'hello world'
+// })
+
+// get(child(listsRef, 'lists'))
+// .then(data => console.log( Object.values(data.val()) ));
 
 function reducer(state = { lists:[], credentials: null }, action) {
   const { type, payload } = action;

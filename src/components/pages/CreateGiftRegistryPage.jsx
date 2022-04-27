@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-
+import { getDatabase, ref, set } from "firebase/database";
 export default function CreateWishlist() {
   let sitestring = '';
 
@@ -19,7 +19,8 @@ export default function CreateWishlist() {
       document.querySelector('.save').setAttribute('hidden', true);
       document.querySelector('.wishlist-link').removeAttribute('hidden');
       document.querySelector('.newlist').removeAttribute('disabled');
-
+      const db = getDatabase();
+      set(ref(db,), list)
     }
 
   }

@@ -6,6 +6,7 @@ export default function Wishlist() {
   const params = useParams();
   const lists = useSelector(state => state.lists);
   const [list, setList] = useState(lists.find(item => item.id == params.id));
+  const state = useSelector(state => state);
 
   const addGiverName = () => {
     if (document.querySelector('.wishlist__giver').value) {
@@ -23,7 +24,7 @@ export default function Wishlist() {
       <div className="wishlist__giver-container">
 
         <label htmlFor="giver" className="wishlist__giver-label">Для перехода к списку введите имя: </label>
-        <input id="giver" className="wishlist__giver" autocomplete="off"></input>
+        <input id="giver" className="wishlist__giver" autoComplete="off"></input>
         <button className="wishlist__giver-button" onClick={addGiverName}>Перейти к выбору</button>
       </div>
 
@@ -34,8 +35,9 @@ export default function Wishlist() {
           {list.items.map(item => (<div className="wishlist__item" key={item.url}><p className="wish__item">Название: {item.name}</p><p className="wish__item">Цена: {item.price}</p><a className="wish__item" href={item.url}>{item.url}</a><button className="wishlist__book" onClick={(e) => { e.target.setAttribute('disabled', 'disabled'); item.isBlocked = true; item.giver = document.querySelector('.wishlist__giver').value }}>Забронировать</button></div>))}
         </div>
       </div>
-      {/* <button onClick={() => console.log(lists)}>посмотреть глобальный state</button>
-      <button onClick={() => console.log(list)}>посмотреть текущий список</button> */}
+      <button onClick={() => console.log(lists)}>посмотреть глобальный state</button>
+      <button onClick={() => console.log(list)}>посмотреть текущий список</button>
+      <button onClick={() => console.log(state)}>посмотреть весь глобальный state</button>
 
     </div>
   )
