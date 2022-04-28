@@ -1,12 +1,29 @@
-import { useState } from "react";
+import { initializeApp } from "firebase/app";
+import { child, get, getDatabase, ref } from "firebase/database";
+import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { useParams } from "react-router-dom"
+import firebaseConfig from "../../configs/firebase.config";
 
 export default function Wishlist() {
+
+  
   const params = useParams();
   const lists = useSelector(state => state.lists);
-  const [list, setList] = useState(lists.find(item => item.id == params.id));
+  const [list, setList] = useState(null);
   const state = useSelector(state => state);
+
+  const getList = async () => {
+    const app = initializeApp(firebaseConfig);
+    const db = getDatabase(app);
+    const listsRef = ref(db);
+    const data = await get(child(listsRef, 'lists'))
+      setList(Object.values(data.val()).find(item =>  item.id == params.id))
+  }
+
+  useEffect(() => {
+    getList()
+  },[])
 
   const addGiverName = () => {
     if (document.querySelector('.wishlist__giver').value) {
@@ -19,6 +36,12 @@ export default function Wishlist() {
 
     }
   }
+  if(!list) return (
+    <div className="center-wrapper">
+    <h3 className="create-wishlist__title">Загрузка...</h3>
+    </div>
+  )
+
   return (
     <div className="center-wrapper">
       <div className="wishlist__giver-container">

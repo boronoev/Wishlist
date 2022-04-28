@@ -1,7 +1,32 @@
+import {
+  EmailIcon,
+  EmailShareButton,
+  FacebookShareButton,
+  HatenaShareButton,
+  InstapaperShareButton,
+  LineShareButton,
+  LinkedinShareButton,
+  LivejournalShareButton,
+  MailruShareButton,
+  OKShareButton,
+  PinterestShareButton,
+  PocketShareButton,
+  RedditShareButton,
+  TelegramIcon,
+  TelegramShareButton,
+  TumblrShareButton,
+  TwitterShareButton,
+  ViberShareButton,
+  VKShareButton,
+  WhatsappShareButton,
+  WorkplaceShareButton
+} from "react-share";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import { getDatabase, ref, set } from "firebase/database";
+import { getDatabase, push, ref, set } from "firebase/database";
+import { initializeApp } from "firebase/app";
+import firebaseConfig from "../../configs/firebase.config";
 export default function CreateWishlist() {
   let sitestring = '';
 
@@ -14,13 +39,23 @@ export default function CreateWishlist() {
   const addList = () => {
     if (!list.items.length) return;
     if (listStatus) {
+      setList({ ...list, user: stateView.credentials.user.uid });
+
       dispatch({ type: 'ADDLIST', payload: list });
       setListStatus(false);
       document.querySelector('.save').setAttribute('hidden', true);
       document.querySelector('.wishlist-link').removeAttribute('hidden');
+      document.querySelector('.share-block').removeAttribute('hidden');
+
       document.querySelector('.newlist').removeAttribute('disabled');
-      const db = getDatabase();
-      set(ref(db,), list);
+      // const db = getDatabase();
+      // set(ref(db, 'lists'), list);
+      const app = initializeApp(firebaseConfig);
+      const db = getDatabase(app);
+      const listsRef = ref(db, 'lists');
+      const listRef = push(listsRef);
+
+      set(listRef, list)
     }
 
   }
@@ -34,7 +69,7 @@ export default function CreateWishlist() {
     setListStatus('Сохранить');
     document.querySelector('.wishlist-link').setAttribute('hidden', true);
     document.querySelector('.save').removeAttribute('hidden');
-
+    console.log('a')
   }
   const [list, setList] = useState({ id: Date.now(), title: 'noname', items: [] });
   const handleNewSubmit = (e) => {
@@ -124,7 +159,12 @@ export default function CreateWishlist() {
             <label className="create-wishlist__smalltitle">Название списка:</label>
             <input className="wishlist__title-input" value={titlevalue} onChange={handleTitleChange} name="title" autoComplete="off"></input>
           </div>
-          <div>
+          <div className="right-block">
+            <div className="share-block" hidden>
+              <EmailShareButton className="share-button" url={`http://localhost:3000/${list.id}`} ><EmailIcon size={32} round></EmailIcon></EmailShareButton>
+              <TelegramShareButton url={`http://localhost:3000/${list.id}`}><TelegramIcon size={32} round></TelegramIcon></TelegramShareButton>
+
+            </div>
             <button className="save" onClick={addList}>Сохранить</button>
             <Link className="wishlist-link" to={`/${list.id}`} hidden>Перейти к списку</Link>
             <button className="newlist" onClick={createNewList} disabled>Создать новый список</button>
@@ -134,9 +174,9 @@ export default function CreateWishlist() {
 
         <form onSubmit={handleNewSubmit} className="create-wishlist__form">
           <h4 className="create-wishlist__form-title">Добавление подарка в список</h4>
-          
+
           <div className="url-container">
-          <label className="create-wishlist__url-label">Вставьте ссылку:</label>
+            <label className="create-wishlist__url-label">Вставьте ссылку:</label>
             <input className="wishlist__url-input" value={urlvalue} onChange={handleURLChange} name="url" required ></input>
             <button className="add-url" type="button">+</button>
           </div>

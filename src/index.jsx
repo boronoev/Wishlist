@@ -32,6 +32,8 @@ function reducer(state = { lists:[], credentials: null }, action) {
       return {...state, credentials: payload};
     case 'ADDLIST':
       return {  ...state, lists: [...state.lists, payload] };
+    // case 'LOGOUT':
+    //   return {...state, }
     default: return state;
   }
 }

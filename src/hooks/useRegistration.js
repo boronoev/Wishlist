@@ -6,7 +6,6 @@ export default function useRegistration () {
   const app = useContext(FirebaseContext);
   const auth = getAuth(app);
 
-  return {
-    registrate: createUserWithEmailAndPassword.bind(null, auth),
-  }
+  return createUserWithEmailAndPassword.bind(null, auth)
+  
 }

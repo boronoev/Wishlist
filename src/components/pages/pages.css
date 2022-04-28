@@ -331,6 +331,7 @@
 }
 
 .save {
+  height: fit-content;
   width: 150px;
   padding: 10px;
   font-size: 14px;
@@ -344,8 +345,8 @@
 }
 
 .wishlist-link {
-  width: 150px;
-  padding: 10px;
+  height: fit-content;
+  padding: 11px;
   font-size: 14px;
   border-radius: 20px;
   border: 2px solid rgb(190, 190, 190);
@@ -356,6 +357,7 @@
   background-color: rgba(255, 255, 255, 0.7);
 }
 .newlist { 
+  height: fit-content;
   padding: 10px;
   font-size: 14px;
   border-radius: 20px;
@@ -472,4 +474,19 @@
 .gray {
   background-color: lightgray;
   color: gray;
+}
+
+
+.share-button {
+  margin-top: 4px;
+  margin-right: 6px;
+}
+
+.share-block{
+  margin-right: 20px;
+}
+
+.right-block {
+  display: flex;
+  justify-content: space-between;
 }
