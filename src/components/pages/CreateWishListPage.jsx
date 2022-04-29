@@ -161,8 +161,8 @@ export default function CreateWishlist() {
           </div>
           <div className="right-block">
             <div className="share-block" hidden>
-              <EmailShareButton className="share-button" url={`http://localhost:3000/${list.id}`} ><EmailIcon size={32} round></EmailIcon></EmailShareButton>
-              <TelegramShareButton url={`http://localhost:3000/${list.id}`}><TelegramIcon size={32} round></TelegramIcon></TelegramShareButton>
+              <EmailShareButton className="share-button" url={`http://${document.domain}/${list.id}`} ><EmailIcon size={32} round></EmailIcon></EmailShareButton>
+              <TelegramShareButton url={`http://${document.domain}/${list.id}`}><TelegramIcon size={32} round></TelegramIcon></TelegramShareButton>
 
             </div>
             <button className="save" onClick={addList}>Сохранить</button>

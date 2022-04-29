@@ -1,6 +1,7 @@
 import { async } from "@firebase/util";
 import { updateProfile } from "firebase/auth";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import useAuth from "../../hooks/useAuth";
 import useRegistration from "../../hooks/useRegistration";
 
@@ -20,15 +21,23 @@ export default function Signup() {
   const handleNewNameChange = (e) => {
     setNewName(e.target.value);
   }
+  const navigate = useNavigate();
 
   const onSubmit = async (e) => {
     e.preventDefault();
-    const email = newloginvalue
-    await reg(email, newpasswordvalue)
-    await auth(email, newpasswordvalue)
-    await update({displayName: newnamevalue})
+    const email = newloginvalue;
+    try {
+      await reg(email, newpasswordvalue);
+      await auth(email, newpasswordvalue);
+      await update({displayName: newnamevalue});
+      navigate("/");
+    }
+    catch (err) {
+      alert (err);
+    }
 
-    console.log( module.currentUser )
+
+    // console.log( module.currentUser )
   }
 
   // onSubmit()

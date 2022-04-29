@@ -7,7 +7,7 @@ import firebaseConfig from "../../configs/firebase.config";
 
 export default function Wishlist() {
 
-  
+
   const params = useParams();
   const lists = useSelector(state => state.lists);
   const [list, setList] = useState(null);
@@ -18,12 +18,12 @@ export default function Wishlist() {
     const db = getDatabase(app);
     const listsRef = ref(db);
     const data = await get(child(listsRef, 'lists'))
-      setList(Object.values(data.val()).find(item =>  item.id == params.id))
+    setList(Object.values(data.val()).find(item => item.id == params.id))
   }
 
   useEffect(() => {
     getList()
-  },[])
+  }, [])
 
   const addGiverName = () => {
     if (document.querySelector('.wishlist__giver').value) {
@@ -36,9 +36,9 @@ export default function Wishlist() {
 
     }
   }
-  if(!list) return (
+  if (!list) return (
     <div className="center-wrapper">
-    <h3 className="create-wishlist__title">Загрузка...</h3>
+      <h3 className="create-wishlist__title">Загрузка...</h3>
     </div>
   )
 
@@ -55,12 +55,12 @@ export default function Wishlist() {
       <div className="wishlist__wishlist hidden">
         <p className="create-wishlist__url-label">{list.title}</p>
         <div className="wishlist__items">
-          {list.items.map(item => (<div className="wishlist__item" key={item.url}><p className="wish__item">Название: {item.name}</p><p className="wish__item">Цена: {item.price}</p><a className="wish__item" href={item.url}>{item.url}</a><button className="wishlist__book" onClick={(e) => { e.target.setAttribute('disabled', 'disabled'); item.isBlocked = true; item.giver = document.querySelector('.wishlist__giver').value }}>Забронировать</button></div>))}
+          {list.items.map(item => (<div className="wishlist__item" key={item.url}><p className="wish__item">Название: {item.name}</p><p className="wish__item">Цена: {item.price}</p><a className="wish__item" href={item.url}>{item.url}</a><button className="wishlist__book" onClick={(e) => { e.target.setAttribute('disabled', 'disabled'); document.querySelector('.wishlist__book').textContent = 'Забронировано'; item.isBlocked = true; item.giver = document.querySelector('.wishlist__giver').value }}>Забронировать</button></div>))}
         </div>
       </div>
-      <button onClick={() => console.log(lists)}>посмотреть глобальный state</button>
+      {/* <button onClick={() => console.log(lists)}>посмотреть глобальный state</button>
       <button onClick={() => console.log(list)}>посмотреть текущий список</button>
-      <button onClick={() => console.log(state)}>посмотреть весь глобальный state</button>
+      <button onClick={() => console.log(state)}>посмотреть весь глобальный state</button> */}
 
     </div>
   )

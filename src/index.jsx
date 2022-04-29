@@ -7,13 +7,17 @@ import WishlistApp from './components/App';
 import { initializeApp } from "firebase/app";
 import firebaseConfig from './configs/firebase.config';
 import { FirebaseProvider } from './contexts/firebase.context';
-import { child, get, getDatabase, push, ref, set } from 'firebase/database';
+import { child, get, getDatabase, push, ref, set, update } from 'firebase/database';
 
 const app = initializeApp(firebaseConfig);
 
 const db = getDatabase(app);
 const listsRef = ref(db);
 const listRef = push(listsRef);
+
+// update(ref(db), {
+//   ["lists/-N0f49hSb8QDAjB0Gw4T/items/0"]: {value: 'hello'}
+// }).then(d => console.log(d)).catch(e => console.log(e, 'error'));
 
 // set(listRef, {
 //   title: 'hello world'

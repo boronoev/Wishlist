@@ -20,7 +20,7 @@ export default function Mainpage() {
           {/* <a href="https://www.vecteezy.com/free-vector/gift">Gift Vectors by Vecteezy</a> */}
         </div>
       </div>
-      <button onClick={() => console.log(state)}>посмотреть весь глобальный state</button>
+      {/* <button onClick={() => console.log(state)}>посмотреть весь глобальный state</button> */}
     </div>
   )
 }

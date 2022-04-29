@@ -16,7 +16,6 @@ import { useDispatch, useSelector } from 'react-redux'
 
 
 export default function WishlistApp() {
-
   const { auth } = useAuth();
   // const credentials = useSelector(state => state.credentials);
   // const dispath = useDispatch();

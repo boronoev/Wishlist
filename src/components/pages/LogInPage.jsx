@@ -15,7 +15,7 @@ export default function LogIn() {
   const { auth } = useAuth();
   const credentials = useSelector(state => state.credentials);
   const dispatch = useDispatch();
-  let navigate = useNavigate();
+  const navigate = useNavigate();
 
   const init = async () => {
     try {
